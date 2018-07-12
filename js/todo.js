@@ -27,7 +27,9 @@ function update() {
 
         const $button = document.createElement('button');
         $button.setAttribute('class', 'destroy');
+        $button.addEventListener('click', onDeleteItem.bind(null, item.id));
         $li.appendChild($button);
+       
         
 //the counter to count how many elements are left or marked (using filter)
 //it could be shorter but i prefer it that way to have better understanding 
@@ -67,10 +69,13 @@ function funToggle(id){
     update();
 }
 
+function onDeleteItem(id) {
+    TODOS = TODOS.filter(function (item){
+        return item.id !== id
+    });
+    update();
+}
 
 const newTodo = document.querySelector('.new-todo');
 newTodo.addEventListener('change', doNewToDo);
-
-
-
 
