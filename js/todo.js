@@ -44,6 +44,18 @@ function update() {
         $count.innerHTML = ($filter.length + ' items left');
     }
 
+    const $clear = document.querySelector('.clear-completed');
+    const clearDone = TODOS.filter(function(clearing){
+        return clearing.done;
+    });
+    if (clearDone.length > 0) {
+        $clear.style.display = 'block';
+    } else { 
+        $clear.style.display = 'none';
+    }
+    $clear.addEventListener('click', onClearItem.bind(null, item.id));
+        
+
     }
 
     document.querySelector('.main').style.display = 'block';
@@ -71,7 +83,15 @@ function funToggle(id){
 
 function onDeleteItem(id) {
     TODOS = TODOS.filter(function (item){
-        return item.id !== id
+        return item.id !== id;
+    });
+    update();
+}
+
+function onClearItem(id){
+    TODOS = TODOS.filter(function(item){
+        return !item.done;
+
     });
     update();
 }
